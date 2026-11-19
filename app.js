@@ -1,5 +1,5 @@
 'use strict';
-/* Better Together: questionario soci con accesso tramite codice personale. */
+/* Better Together: accesso diretto con link personale. */
 const ENDPOINT='https://ixevtederjaovjkhvuqi.supabase.co/functions/v1/bt-questionario';
 const SCHEMA_VERSION=9;
 const SURVEY_REVISION='BT_V9_4_20261119_ATTIVITA28';
@@ -34,7 +34,6 @@ for(const q of QUESTIONS){
   else rowOrders[q.id]=q.random?seededShuffle(q.rows,randomSeed(invitation+':'+q.id+':rows')):q.rows;
  }
 }
-function tokenLink(token){return `${location.origin}${location.pathname}?token=${encodeURIComponent(token)}`;}
 function setSaveStatus(text){const el=document.getElementById('save-state');if(el)el.textContent=text||'';}
 function stepIndex(){return Math.max(0,steps().findIndex(x=>x.key===currentKey));}
 function payloadAnswers(){return {...answers,__schema_version:SCHEMA_VERSION,__survey_revision:SURVEY_REVISION};}
@@ -71,18 +70,18 @@ async function flushSave(){
  await enqueueSave();
  if(screen==='done')throw new Error('Questionario già completato');
 }
-function renderHome(){
+function renderMissingLink(){
  document.body.dataset.surveyScreen='intro';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Questionario Better Together</h1><p>Per accedere al questionario, inserisci il codice personale che hai ricevuto.</p><form id="code-form"><label for="code-input"><strong>Codice personale</strong></label><div class="write-in"><input id="code-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" inputmode="text" maxlength="64" placeholder="Inserisci il codice personale" required style="width:100%;font-family:monospace"></div><div class="actions"><span></span><button class="btn primary" type="submit">Accedi al questionario →</button></div></form><p class="muted small">Conserva il codice personale: ti permetterà di riprendere la compilazione se dovessi interromperla.</p><p id="home-message" role="status"></p></div></div>`;
+ app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><h1>Questionario Better Together</h1><p>Per partecipare, apri il link personale che hai ricevuto da Better Together.</p><p>Se non trovi più il link, contatta l’associazione.</p></div></div>';
 }
 function renderBadToken(message=''){
  document.body.dataset.surveyScreen='intro';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Codice non valido</h1><p>${escapeHtml(message||'Il codice inserito non è stato riconosciuto. Verificalo e riprova.')}</p><a href="${escapeHtml(location.pathname)}">Torna alla pagina del codice</a></div></div>`;
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Link non valido</h1><p>${escapeHtml(message||'Questo link personale non è stato riconosciuto. Apri il link che hai ricevuto da Better Together oppure contatta l’associazione.')}</p></div></div>`;
 }
-function renderLoading(){document.body.dataset.surveyScreen='intro';app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><h1>Recupero della compilazione…</h1><p>Sto verificando il codice e caricando le eventuali risposte già registrate.</p></div></div>';}
+function renderLoading(){document.body.dataset.surveyScreen='intro';app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><h1>Recupero della compilazione…</h1><p>Sto verificando il link personale e caricando le eventuali risposte già registrate.</p></div></div>';}
 function renderUnavailable(message){document.body.dataset.surveyScreen='intro';app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Connessione non riuscita</h1><p>Non posso verificare il link o caricare le risposte: ${escapeHtml(message)}</p><button class="btn primary" type="button" data-action="retry">Riprova</button></div></div>`;}
 async function loadRemote(){
- if(!VALID_TOKEN.test(invitation)){renderBadToken('Controlla il codice personale e riprova.');return;}
+ if(!VALID_TOKEN.test(invitation)){renderBadToken('Il link personale non è valido. Apri il link ricevuto da Better Together oppure contatta l’associazione.');return;}
  renderLoading();
  try{
   const result=await api({token:invitation,action:'load'});
@@ -211,7 +210,7 @@ function renderRaccordo(step,preserveScroll=false){
 function renderIntro(){
  document.body.dataset.surveyScreen='intro';
  const upgrade=upgradeNeeded?'<p class="demo-notice"><strong>Questionario aggiornato.</strong> Le risposte parziali salvate in una versione precedente non possono essere recuperate nel nuovo questionario. Se scegli di ricominciare, saranno sostituite. Le compilazioni già concluse rimangono invariate.</p>':'';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><p class="muted small">Puoi interrompere e riprendere la compilazione con lo stesso codice personale, anche da un altro dispositivo.</p>${upgrade}</div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">${upgradeNeeded?'Ricomincia con il nuovo questionario':Object.keys(answers).some(k=>!k.startsWith('__'))?'Riprendi il questionario':'Inizia il questionario'} →</button></div></div>`;
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><p class="muted small">Se interrompi la compilazione, potrai riprenderla riaprendo il link personale che hai ricevuto, anche da un altro dispositivo.</p>${upgrade}</div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">${upgradeNeeded?'Ricomincia con il nuovo questionario':Object.keys(answers).some(k=>!k.startsWith('__'))?'Riprendi il questionario':'Inizia il questionario'} →</button></div></div>`;
 }
 function renderScale(q){
  const ans=getAnswer(q)?.v;
@@ -447,16 +446,9 @@ function valueRows(){
 }
 function renderDone(){
  document.body.dataset.surveyScreen='done';
- app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Questionario completato</h1><p class="lead">Grazie per il tempo che ci hai dedicato. Le tue risposte sono state registrate.</p><p>Il questionario risulta già completato e non può essere compilato una seconda volta con lo stesso codice.</p></div></div>';
+ app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Questionario completato</h1><p class="lead">Grazie per il tempo che ci hai dedicato. Le tue risposte sono state registrate.</p><p>Il questionario risulta già completato e non può essere compilato una seconda volta tramite questo link personale.</p></div></div>';
  window.scrollTo(0,0);
 }
-app.addEventListener('submit',e=>{
- if(e.target.id!=='code-form')return;
- e.preventDefault();
- const code=document.getElementById('code-input')?.value?.trim().toLowerCase()||'';
- if(!VALID_TOKEN.test(code)){document.getElementById('home-message').textContent='Il codice inserito non è valido. Verificalo e riprova.';return;}
- location.assign(tokenLink(code));
-});
 app.addEventListener('click',e=>{
  const target=e.target.closest('[data-action]');if(!target)return;
  const action=target.dataset.action;
@@ -504,4 +496,4 @@ document.addEventListener('visibilitychange',()=>{
   fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:invitation,action:'save',answers:payloadAnswers(),current_step:stepIndex()}),keepalive:true,cache:'no-store'}).catch(()=>{});
  }
 });
-if(!invitation)renderHome();else loadRemote();
+if(!invitation)renderMissingLink();else loadRemote();
