@@ -1,0 +1,21 @@
+AGGIORNAMENTO INTERFACCIA PER I SOCI - test-dev
+
+Nella schermata iniziale compare soltanto il modulo di accesso con il CODICE PERSONALE.
+Non sono presenti etichette di prova, soci fittizi o informazioni tecniche su Supabase.
+L'introduzione ordinaria del questionario viene mostrata dopo l'accesso, come prima.
+Il collegamento personalizzato ?token=... continua ad aprire direttamente il questionario.
+
+PUBBLICAZIONE NEL REPOSITORY marioquaranta/test-dev
+1. Conserva una copia o un commit dell'attuale versione.
+2. Sostituisci soltanto app.js e index.html con i due file in questo pacchetto.
+3. Non modificare questions.js, styles.css, logo.png o la Edge Function Supabase.
+4. Apri il sito senza token e verifica la pagina di accesso.
+5. Apri un link con un token FINTIZIO non utilizzato e verifica
+   caricamento, salvataggio, ripresa e completamento prima dell'uso reale.
+
+NOTE
+- I file completi sono inclusi nello ZIP, ma soltanto app.js e index.html sono cambiati.
+- Questa modifica non cambia domande, filtri, randomizzazione o formato JSON.
+- Il sito test-dev continua a usare lo stesso endpoint e le stesse tabelle di prova.
+- Prima di usare il sistema per soci reali, occorre verificare informativa privacy,
+  accesso all'infrastruttura e ambiente di destinazione.

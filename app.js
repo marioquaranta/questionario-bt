@@ -1,5 +1,5 @@
 'use strict';
-/* Better Together: ambiente test-dev con token individuali e Supabase (solo dati fittizi). */
+/* Better Together: questionario soci con accesso tramite codice personale. */
 const ENDPOINT='https://ixevtederjaovjkhvuqi.supabase.co/functions/v1/bt-questionario';
 const SCHEMA_VERSION=9;
 const SURVEY_REVISION='BT_V9_4_20261119_ATTIVITA28';
@@ -73,13 +73,16 @@ async function flushSave(){
 }
 function renderHome(){
  document.body.dataset.surveyScreen='intro';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><div class="dev-badge">AMBIENTE DI SVILUPPO · DATI FITTIZI</div><h1>Test della raccolta centralizzata</h1><p>Per provare i link personalizzati utilizza uno dei codici di 64 caratteri ottenuti da Supabase. Non inserire dati di soci reali.</p><p class="demo-notice"><strong>La raccolta è centralizzata.</strong> Le compilazioni vengono salvate su Supabase e possono essere riprese da browser differenti.</p><form id="code-form"><label for="code-input"><strong>Codice personale di prova</strong></label><div class="write-in"><input id="code-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" inputmode="text" maxlength="64" placeholder="Incolla qui il codice dal CSV" required style="width:100%;font-family:monospace"></div><div class="actions"><span></span><button class="btn primary" type="submit">Apri il questionario →</button></div></form><p class="muted small">Puoi anche aprire il collegamento personale con <code>?token=CODICE</code>. Non pubblicare i codici su GitHub.</p><p id="home-message" role="status"></p></div></div>`;
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Questionario Better Together</h1><p>Per accedere al questionario, inserisci il codice personale che hai ricevuto.</p><form id="code-form"><label for="code-input"><strong>Codice personale</strong></label><div class="write-in"><input id="code-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" inputmode="text" maxlength="64" placeholder="Inserisci il codice personale" required style="width:100%;font-family:monospace"></div><div class="actions"><span></span><button class="btn primary" type="submit">Accedi al questionario →</button></div></form><p class="muted small">Conserva il codice personale: ti permetterà di riprendere la compilazione se dovessi interromperla.</p><p id="home-message" role="status"></p></div></div>`;
 }
-function renderBadToken(message=''){document.body.dataset.surveyScreen='intro';app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Link di prova non valido</h1><p>${escapeHtml(message||'Il codice non è stato trovato nell’archivio di test.')}</p><a href="${escapeHtml(location.pathname)}">Torna alla pagina iniziale</a></div></div>`;}
+function renderBadToken(message=''){
+ document.body.dataset.surveyScreen='intro';
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Codice non valido</h1><p>${escapeHtml(message||'Il codice inserito non è stato riconosciuto. Verificalo e riprova.')}</p><a href="${escapeHtml(location.pathname)}">Torna alla pagina del codice</a></div></div>`;
+}
 function renderLoading(){document.body.dataset.surveyScreen='intro';app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><h1>Recupero della compilazione…</h1><p>Sto verificando il codice e caricando le eventuali risposte già registrate.</p></div></div>';}
 function renderUnavailable(message){document.body.dataset.surveyScreen='intro';app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Connessione non riuscita</h1><p>Non posso verificare il link o caricare le risposte: ${escapeHtml(message)}</p><button class="btn primary" type="button" data-action="retry">Riprova</button></div></div>`;}
 async function loadRemote(){
- if(!VALID_TOKEN.test(invitation)){renderBadToken('Il codice deve contenere 64 caratteri esadecimali.');return;}
+ if(!VALID_TOKEN.test(invitation)){renderBadToken('Controlla il codice personale e riprova.');return;}
  renderLoading();
  try{
   const result=await api({token:invitation,action:'load'});
@@ -207,8 +210,8 @@ function renderRaccordo(step,preserveScroll=false){
 }
 function renderIntro(){
  document.body.dataset.surveyScreen='intro';
- const upgrade=upgradeNeeded?'<p class="demo-notice"><strong>Questionario aggiornato.</strong> Per evitare di associare vecchie risposte a nuove domande, questa compilazione parziale va ricominciata. Se prosegui, le precedenti risposte parziali su questo codice saranno sostituite. I questionari già completati non vengono modificati.</p>':'';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><div class="demo-notice"><strong>Puoi interrompere e riprendere il questionario usando questo link anche su un altro dispositivo.</strong> Le risposte vengono salvate nel database Supabase di prova.</div>${upgrade}<p class="muted small">AMBIENTE DI SVILUPPO · Utilizza esclusivamente risposte fittizie.</p></div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">${upgradeNeeded?'Ricomincia con il nuovo questionario':Object.keys(answers).some(k=>!k.startsWith('__'))?'Riprendi il questionario':'Inizia il questionario'} →</button></div></div>`;
+ const upgrade=upgradeNeeded?'<p class="demo-notice"><strong>Questionario aggiornato.</strong> Le risposte parziali salvate in una versione precedente non possono essere recuperate nel nuovo questionario. Se scegli di ricominciare, saranno sostituite. Le compilazioni già concluse rimangono invariate.</p>':'';
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><p class="muted small">Puoi interrompere e riprendere la compilazione con lo stesso codice personale, anche da un altro dispositivo.</p>${upgrade}</div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">${upgradeNeeded?'Ricomincia con il nuovo questionario':Object.keys(answers).some(k=>!k.startsWith('__'))?'Riprendi il questionario':'Inizia il questionario'} →</button></div></div>`;
 }
 function renderScale(q){
  const ans=getAnswer(q)?.v;
@@ -444,14 +447,14 @@ function valueRows(){
 }
 function renderDone(){
  document.body.dataset.surveyScreen='done';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Questionario già completato</h1><p class="lead">La compilazione di questo codice fittizio risulta completata nell’archivio centralizzato.</p><p class="demo-notice"><strong>Test anti-duplicazione:</strong> lo stesso link non deve consentire un'altra compilazione, nemmeno in un browser diverso.</p><a class="btn primary" href="${escapeHtml(location.pathname)}">Torna alla pagina iniziale</a></div></div>`;
+ app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Questionario completato</h1><p class="lead">Grazie per il tempo che ci hai dedicato. Le tue risposte sono state registrate.</p><p>Il questionario risulta già completato e non può essere compilato una seconda volta con lo stesso codice.</p></div></div>';
  window.scrollTo(0,0);
 }
 app.addEventListener('submit',e=>{
  if(e.target.id!=='code-form')return;
  e.preventDefault();
  const code=document.getElementById('code-input')?.value?.trim().toLowerCase()||'';
- if(!VALID_TOKEN.test(code)){document.getElementById('home-message').textContent='Codice non valido: servono 64 caratteri esadecimali.';return;}
+ if(!VALID_TOKEN.test(code)){document.getElementById('home-message').textContent='Il codice inserito non è valido. Verificalo e riprova.';return;}
  location.assign(tokenLink(code));
 });
 app.addEventListener('click',e=>{
@@ -501,6 +504,4 @@ document.addEventListener('visibilitychange',()=>{
   fetch(ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({token:invitation,action:'save',answers:payloadAnswers(),current_step:stepIndex()}),keepalive:true,cache:'no-store'}).catch(()=>{});
  }
 });
-// Read-only interface for automated smoke testing; not displayed to respondents.
-window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q?.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get exportedValues(){return valueRows();},get pages(){return QUESTIONS;}};
 if(!invitation)renderHome();else loadRemote();
