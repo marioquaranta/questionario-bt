@@ -78,7 +78,7 @@ function renderBadToken(message=''){
  document.body.dataset.surveyScreen='intro';
  app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Link non valido</h1><p>${escapeHtml(message||'Questo link personale non è stato riconosciuto. Apri il link che hai ricevuto da Better Together oppure contatta l’associazione.')}</p></div></div>`;
 }
-function renderLoading(){document.body.dataset.surveyScreen='intro';app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><h1>Recupero della compilazione…</h1><p>Sto verificando il link personale e caricando le eventuali risposte già registrate.</p></div></div>';}
+function renderLoading(){document.body.dataset.surveyScreen='intro';app.innerHTML='<div class="single-flow"><div class="question-card intro-card"><h1>Caricamento del questionario…</h1><p>Sto verificando il link personale e caricando le eventuali risposte già registrate.</p></div></div>';}
 function renderUnavailable(message){document.body.dataset.surveyScreen='intro';app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Connessione non riuscita</h1><p>Non posso verificare il link o caricare le risposte: ${escapeHtml(message)}</p><button class="btn primary" type="button" data-action="retry">Riprova</button></div></div>`;}
 async function loadRemote(){
  if(!VALID_TOKEN.test(invitation)){renderBadToken('Il link personale non è valido. Apri il link ricevuto da Better Together oppure contatta l’associazione.');return;}
