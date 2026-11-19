@@ -1,0 +1,76 @@
+BETTER TOGETHER - AGGIORNAMENTO TEST-DEV (QUESTIONARIO v9/4)
+19 novembre 2026
+
+AMBIENTE: soltanto test-dev, con risposte FITTIZIE.
+Non caricare questo pacchetto nel repository test dei volontari.
+
+FONTE DEL CODICE
+- Frontend test-dev: ultima copia recuperabile nella Library, datata 13 novembre 2026
+  (archivio Word8 con Supabase centralizzato).
+- Questionario: versione test aggiornata al 19 novembre, dopo Word v9(4),
+  con le correzioni manuali successive indicate in chat.
+- Non e' stato possibile verificare direttamente il contenuto corrente del repository remoto.
+  Prima di pubblicare, controllare di non sovrascrivere modifiche fatte in test-dev
+  successivamente alla copia del 13 novembre.
+
+PER PUBBLICARE
+1. Conservare una copia/commit della versione test-dev attualmente online.
+2. Nel repository marioquaranta/test-dev sostituire:
+   - questions.js
+   - app.js
+   - styles.css
+3. index.html e logo.png restano invariati rispetto alla copia recuperata.
+   Se nell'index.html attuale compare survey-patch.js, toglierne il riferimento.
+   Deve caricare soltanto questions.js seguito da app.js.
+4. Controllare che GitHub Pages abbia pubblicato la nuova versione.
+
+CONTENUTI
+- 34 domande del Word v9(4), 9 raccordi su pagine autonome
+- 28 attivita' B7 e dieci sedi B10
+- B8 e B12: batterie su una schermata, con una risposta per attivita'/sede
+- B11: una schermata per sede selezionata
+- Gestione di filtri, randomizzazioni, opzioni esclusive e grassetti viola
+- A2b: canale selezionato a capo, in viola, punto interrogativo nero
+- Conservate le correzioni D5, E2 e le altre approvate per test
+
+INTEGRAZIONE SUPABASE
+- Endpoint di sviluppo invariato: funzione bt-questionario gia' usata in test-dev.
+- Nessuna credenziale o codice personale viene distribuito nello ZIP.
+- Token esadecimale di 64 caratteri e salvaggio remoto progressivo.
+- Nuovo schema risposte: __schema_version = 9 e __survey_revision.
+- Le risposte a B11 sono archiviate come B11.byVenue[codice_sede].v;
+  B8 e B12 sono B8.rows[codice_riga], B12.rows[codice_riga].
+- Una compilazione gia' conclusa non viene modificata dal frontend.
+- Una compilazione PARZIALE di versione precedente NON viene migrata
+  automaticamente (domande e codici sono cambiati). Il rispondente deve
+  confermare espressamente il riavvio, che sovrascrive il suo vecchio
+  tentativo parziale relativo a quel codice.
+
+PROVE ESEGUITE
+- Sintassi JS di app.js e questions.js: OK (node --check).
+- 3.858 verifiche logiche con Node, tra cui combinazioni di filtri,
+  gruppi di tre attivita' e di tre sedi, rimozione risposte dipendenti.
+- Prova simulata di API load/save/complete: OK (mock; non il Supabase reale).
+- Ripresa multi-browser simulata, blocco di compilazione conclusa simulato.
+
+PROVE OBBLIGATORIE DOPO PUBBLICAZIONE SU TEST-DEV
+1. Usare un token di prova NON completato.
+2. Compilare P1, P2 e verificare i casi in cui P3 compare/scompare.
+3. Compilare B7 con 2-3 attivita': verificare B8 e l'eliminazione di
+   vecchie risposte quando si deseleziona un'attivita'.
+4. Selezionare 3 sedi in B10: B12 unica pagina, B11 tre pagine;
+   riprovare tornando indietro e modificando le sedi.
+5. Interrompere a meta' e aprire il link su un secondo browser: verificare
+   risposte, current_step e stato effettivo nella tabella Supabase.
+6. Completare la survey e riaprire lo stesso token: non deve essere
+   possibile reinviare. Verificare completed_at nel database.
+7. Verificare la forma effettiva del JSON esportato dal database e
+   aggiornare le eventuali query SQL di esportazione Word8 che
+   si basavano sulle vecchie domande/strutture.
+
+LIMITI IMPORTANTI
+L'accesso diretto a GitHub e al Supabase reale non e' stato disponibile
+in questa sessione. Non e' possibile garantire la compatibilita' con
+modifiche server-side non presenti nei backup. Il test simulato non
+sostituisce la prova end-to-end reale. Non usare token o dati di soci
+reali finche' la verifica end-to-end non e' stata completata.
