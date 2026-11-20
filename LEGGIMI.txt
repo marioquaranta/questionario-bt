@@ -1,26 +1,32 @@
-BETTER TOGETHER - aggiornamento v9.5 (20 novembre 2026)
+BETTER TOGETHER - Pagina iniziale e informativa privacy - Questionario v9.5
 
-ATTENZIONE: per la prima volta abbiamo aggiornato anche l'elenco delle attività B7 e le regole del server.
+SOSTITUIRE sul repository GitHub Pages che ospita il questionario:
+- index.html        [titolo e footer senza riferimenti a test]
+- app.js            [solo la pagina iniziale; questionario invariato]
+- styles.css        [solo nuovi stili per pagina iniziale e informativa]
 
-NOVITA:
-- B7: 20 attività uniche (Laboratorio di disegno era duplicato), codici F1-F20, più O04/O05 esclusive
-- B8: righe B8_F1 .. B8_F20 aggiornate e associate agli stessi codici
-- B9: nuove sette risposte O01-O07; massimo 2; O06 Altro; O07 Non so esclusiva
-- Numerazione per sezione a schermo: codici di visualizzazione P1-P3, A1-A6, B1-B7, C1-C4, D1-D4, E1, F1-F3, G1-G5, H1.
-- ID tecnici di archivio invariati per non rompere filtri, JSON e SQL. Verificare dizionario per mappatura.
-- Nuova revisione: BT_V9_5_20261120_ATTIVITA20, schema 10.
+AGGIUNGERE nella radice dello stesso repository:
+- privacy.html      [nuova pagina indipendente, senza token]
 
-ORDINE DI PUBBLICAZIONE (solo ambiente di TEST):
-1) Supabase > Edge Functions > bt-questionario > Code: sostituisci index.ts con index_TEST_supabase.ts. Fai Deploy updates.
-2) GitHub Pages repo test-dev: sostituisci app.js, questions.js, styles.css (index.html e logo.png non cambiano).
-3) Apri un NUOVO link fittizio; non servono nuovi token né cancellare le tabelle di test.
-4) Verifica una risposta B7 e B9 con la nuova funzione. Non usare dati reali.
+INVARIATI (copie incluse solo per avere anche un pacchetto completo):
+- questions.js
+- logo.png
 
-PRODUZIONE:
-NON pubblicare index_PROD_conservare.ts adesso: la produzione resta vuota e va sincronizzata al rilascio finale del sito definitivo.
+NESSUNA MODIFICA richiesta a Supabase, bt_invites, bt_responses o alla Edge Function bt-questionario.
+Non modificare i token o il formato dei dati: schema, revisione e codici delle risposte restano v9.5.
 
-COMPILAZIONI GIA' INIZIATE:
-Le risposte parziali della vecchia revisione non sono compatibili con il nuovo catalogo. Lo schema 10 chiede di ricominciare il questionario, con messaggio dedicato. Le compilazioni gia' concluse restano immodificabili.
+Verificare dopo il deploy:
+1. Aprire il proprio link personale valido: si apre 'La tua opinione conta!'
+2. Selezionare 'Leggi l’informativa sulla privacy': si apre privacy.html in altra scheda, senza token in URL
+3. Tornare alla scheda del questionario e premere 'Inizia il questionario': si apre P1
+4. Provare il sito senza token: non consente di compilare; l'informativa resta disponibile nel footer
+5. Le risposte e i salvataggi continuano a essere gestiti dalla Edge Function bt-questionario
 
-RACCOLTA:
-I token e la tabella bt_test_invites restano invariati; sono aggiornati solo le categorie e i relativi codici.
+PRIMA DELL'INVIO REALE: il titolare deve verificare la legittimità della base giuridica
+(legittimo interesse, art. 6.1.f GDPR) e confermare che le misure e i tempi dichiarati
+nell'informativa siano effettivamente implementati. Non c'e' una casella di consenso.
+
+ATTENZIONE: privacy.html e la sezione iniziale non descrivono una raccolta totalmente anonima:
+i link personali consentono il collegamento iniziale tra inviti e risposte. La privacy
+viene tutelata dalla separazione degli identificativi prima dell'analisi e dalla presentazione
+aggregata dei risultati, come concordato.

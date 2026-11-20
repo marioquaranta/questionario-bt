@@ -210,7 +210,26 @@ function renderRaccordo(step,preserveScroll=false){
 function renderIntro(){
  document.body.dataset.surveyScreen='intro';
  const upgrade=upgradeNeeded?'<p class="demo-notice"><strong>Questionario aggiornato.</strong> Le risposte parziali salvate in una versione precedente non possono essere recuperate nel nuovo questionario. Se scegli di ricominciare, saranno sostituite. Le compilazioni già concluse rimangono invariate.</p>':'';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><p class="muted small">Se interrompi la compilazione, potrai riprenderla riaprendo il link personale che hai ricevuto, anche da un altro dispositivo.</p>${upgrade}</div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">${upgradeNeeded?'Ricomincia con il nuovo questionario':Object.keys(answers).some(k=>!k.startsWith('__'))?'Riprendi il questionario':'Inizia il questionario'} →</button></div></div>`;
+ const alreadyStarted=Object.keys(answers).some(k=>!k.startsWith('__'));
+ const startLabel=upgradeNeeded?'Ricomincia con il nuovo questionario':alreadyStarted?'Riprendi il questionario':'Inizia il questionario';
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card bt-welcome">
+  <h1>La tua opinione conta!</h1>
+  <div class="intro-text">
+   <p>Better Together nasce per creare occasioni di incontro, favorire nuove conoscenze e costruire relazioni. Per continuare a crescere e migliorare, abbiamo bisogno anche del <strong>tuo punto di vista</strong>.</p>
+   <p>Con questo questionario vogliamo capire <strong>come hai vissuto la tua esperienza con Better Together</strong>, quali aspetti hai apprezzato, che cosa possiamo migliorare e quali attività ti piacerebbe trovare in futuro.</p>
+   <p><strong>La tua opinione è importante anche se hai partecipato poche volte o non frequenti più i Ritrovi Urbani.</strong> Vogliamo conoscere le esperienze di tutti i soci, non soltanto di chi partecipa regolarmente.</p>
+   <p>Compilare il questionario richiede circa <strong>10 minuti</strong>. Non ci sono risposte giuste o sbagliate: ti chiediamo soltanto di rispondere con sincerità. <strong>La partecipazione è libera e volontaria.</strong></p>
+  </div>
+  <section class="bt-privacy-summary" aria-labelledby="bt-privacy-title">
+   <h2 id="bt-privacy-title">La tua privacy è importante</h2>
+   <p><strong>Puoi rispondere con sincerità e tranquillità.</strong> Le tue risposte saranno trattate con la massima riservatezza e nel pieno rispetto della tua privacy.</p>
+   <p><strong>Chi analizzerà i questionari non conoscerà la tua identità.</strong> Prima dell'analisi, i dati personali saranno separati dalle risposte e saranno adottate specifiche procedure per tutelare l'anonimato dei partecipanti.</p>
+   <p>I risultati saranno presentati esclusivamente in forma aggregata, senza identificare i singoli soci.</p>
+   <p class="bt-privacy-link"><a href="privacy.html" target="_blank" rel="noopener noreferrer">Leggi l'informativa sulla privacy <span aria-hidden="true">↗</span></a></p>
+  </section>
+  <p class="muted small bt-resume-text">Se interrompi la compilazione, potrai riprenderla riaprendo il tuo link personale, anche da un altro dispositivo.</p>
+  ${upgrade}
+ </div><div class="actions bt-intro-actions"><span></span><button type="button" class="btn primary" data-action="start">${startLabel} →</button></div></div>`;
 }
 function renderScale(q){
  const ans=getAnswer(q)?.v;
