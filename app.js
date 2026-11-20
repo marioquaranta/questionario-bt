@@ -251,11 +251,11 @@ function renderSingle(q){
 function renderMulti(q,row=null){
  const ans=getAnswer(q,row)||{v:[],otherTexts:{}};
  const codes=Array.isArray(ans.v)?ans.v:[];
- const maxText=['B7','B10'].includes(q.id)?'':q.max?`Seleziona al massimo ${q.max} risposte.`:'Seleziona tutte le risposte pertinenti.';
+ const maxText=['B7','B9','B10'].includes(q.id)?'':q.max?`Seleziona al massimo ${q.max} risposte.`:'Seleziona tutte le risposte pertinenti.';
  const options=optionOrders[q.id];
  return `${maxText?`<p class="muted small" style="margin-bottom:16px">${maxText}</p>`:''}<div class="choice-list">${options.map(o=>{
    const checked=codes.includes(o.code);
-   return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="checkbox" data-action="check" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${richText(o.label,o.highlights)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">Specifica</label><input id="other-input" data-action="other-text" data-code="${o.code}" maxlength="300" value="${escapeHtml(ans.otherTexts?.[o.code]||'')}" autocomplete="off"></div>`:''}</div>`;
+   return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="checkbox" data-action="check" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${q.id==='B9'?escapeHtml(o.label):richText(o.label,o.highlights)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">Specifica</label><input id="other-input" data-action="other-text" data-code="${o.code}" maxlength="300" value="${escapeHtml(ans.otherTexts?.[o.code]||'')}" autocomplete="off"></div>`:''}</div>`;
  }).join('')}</div>`;
 }
 function renderMatrixItem(q,row){
