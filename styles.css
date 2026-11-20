@@ -733,3 +733,6 @@ body[data-survey-screen="question"] .question-card[data-question="A6-A7"] .batte
     line-height:1.12;
   }
 }
+
+/* Numerazione progressiva per sezione; il codice di archiviazione resta invariato. */
+.question-progress-number { color: var(--purple); font-size: .88rem; font-weight: 700; letter-spacing: .02em; margin: 0 0 .5rem; }

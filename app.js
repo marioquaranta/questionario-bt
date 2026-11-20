@@ -1,8 +1,8 @@
 'use strict';
 /* Better Together: accesso diretto con link personale. */
 const ENDPOINT='https://ixevtederjaovjkhvuqi.supabase.co/functions/v1/bt-questionario';
-const SCHEMA_VERSION=9;
-const SURVEY_REVISION='BT_V9_4_20261119_ATTIVITA28';
+const SCHEMA_VERSION=10;
+const SURVEY_REVISION='BT_V9_5_20261120_ATTIVITA20';
 const SURVEY=window.BT_SURVEY;
 const QUESTIONS=SURVEY.questions;
 const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
@@ -197,7 +197,7 @@ function titleAndHint(q,row){
  }else{
   title=richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights);
  }
- return `<h2 id="question-title">${title}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
+ return `<p class="question-progress-number">${escapeHtml(q.displayCode||q.id)}</p><h2 id="question-title">${title}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 // A raccordo is a standalone screen: never combine it with the first question.
 function renderRaccordo(step,preserveScroll=false){

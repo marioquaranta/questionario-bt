@@ -1,15 +1,26 @@
-AGGIORNAMENTO: ACCESSO DIRETTO TRAMITE LINK PERSONALE
+BETTER TOGETHER - aggiornamento v9.5 (20 novembre 2026)
 
-Su GitHub (repository test-dev) sostituisci soltanto app.js.
-Non modificare index.html, questions.js, styles.css, logo.png o Supabase.
+ATTENZIONE: per la prima volta abbiamo aggiornato anche l'elenco delle attività B7 e le regole del server.
 
-Con un link ?token=... valido: il socio vede direttamente l’introduzione
-del questionario e può iniziare o riprendere la compilazione.
-Senza token: appare un messaggio che invita ad aprire il link personale,
-senza alcun campo per inserire manualmente il codice.
-Con token non valido: appare un messaggio di link non valido.
-Con questionario completato: appare il messaggio di completamento.
+NOVITA:
+- B7: 20 attività uniche (Laboratorio di disegno era duplicato), codici F1-F20, più O04/O05 esclusive
+- B8: righe B8_F1 .. B8_F20 aggiornate e associate agli stessi codici
+- B9: nuove sette risposte O01-O07; massimo 2; O06 Altro; O07 Non so esclusiva
+- Numerazione per sezione a schermo: codici di visualizzazione P1-P3, A1-A6, B1-B7, C1-C4, D1-D4, E1, F1-F3, G1-G5, H1.
+- ID tecnici di archivio invariati per non rompere filtri, JSON e SQL. Verificare dizionario per mappatura.
+- Nuova revisione: BT_V9_5_20261120_ATTIVITA20, schema 10.
 
-L'endpoint rimane quello di test-dev (bt-questionario).
-Questa modifica non riguarda l'ambiente definitivo.
-Conserva una copia o un commit per tornare indietro se serve.
+ORDINE DI PUBBLICAZIONE (solo ambiente di TEST):
+1) Supabase > Edge Functions > bt-questionario > Code: sostituisci index.ts con index_TEST_supabase.ts. Fai Deploy updates.
+2) GitHub Pages repo test-dev: sostituisci app.js, questions.js, styles.css (index.html e logo.png non cambiano).
+3) Apri un NUOVO link fittizio; non servono nuovi token né cancellare le tabelle di test.
+4) Verifica una risposta B7 e B9 con la nuova funzione. Non usare dati reali.
+
+PRODUZIONE:
+NON pubblicare index_PROD_conservare.ts adesso: la produzione resta vuota e va sincronizzata al rilascio finale del sito definitivo.
+
+COMPILAZIONI GIA' INIZIATE:
+Le risposte parziali della vecchia revisione non sono compatibili con il nuovo catalogo. Lo schema 10 chiede di ricominciare il questionario, con messaggio dedicato. Le compilazioni gia' concluse restano immodificabili.
+
+RACCOLTA:
+I token e la tabella bt_test_invites restano invariati; sono aggiornati solo le categorie e i relativi codici.

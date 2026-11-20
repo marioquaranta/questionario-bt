@@ -37,7 +37,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "P1"
     },
     {
       "id": "P2",
@@ -77,7 +78,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "P2"
     },
     {
       "id": "P3",
@@ -105,7 +107,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "P3"
     },
     {
       "id": "A1",
@@ -153,7 +156,8 @@ window.BT_SURVEY = {
         "Considera l’esperienza avuta finora, anche se hai partecipato una sola volta o oggi non frequenti più."
       ],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "A1"
     },
     {
       "id": "A2a",
@@ -190,7 +194,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "A2"
     },
     {
       "id": "A2b",
@@ -236,7 +241,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "A3"
     },
     {
       "id": "A4",
@@ -286,7 +292,8 @@ window.BT_SURVEY = {
       "random": false,
       "highlights": [
         "app"
-      ]
+      ],
+      "displayCode": "A4"
     },
     {
       "id": "A6-A7",
@@ -361,7 +368,8 @@ window.BT_SURVEY = {
           "exclusive": true
         }
       ],
-      "hint": []
+      "hint": [],
+      "displayCode": "A5"
     },
     {
       "id": "A5",
@@ -407,76 +415,77 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "A6"
     },
     {
       "id": "B7",
-      "text": "Quali sono le tre l’attività più recenti a cui hai partecipato più recentemente?",
+      "text": "Quali sono le tre attività organizzate da Better Together a cui hai partecipato più recentemente?",
       "type": "multi",
       "opts": [
         {
           "code": "F1",
-          "label": "Club di scrittura",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F2",
-          "label": "Laboratorio di scrittura stand-up comedy",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F3",
-          "label": "Torneo di cruciverba",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F4",
-          "label": "Laboratorio fotografico",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F5",
-          "label": "Sport Talk",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F6",
           "label": "Aperitivo sociale",
           "other": false,
           "exclusive": false
         },
         {
+          "code": "F2",
+          "label": "Bookclub",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F3",
+          "label": "Simposio filosofico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F4",
+          "label": "Sport Talk",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F5",
+          "label": "Aperiscienza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F6",
+          "label": "Cineforum",
+          "other": false,
+          "exclusive": false
+        },
+        {
           "code": "F7",
-          "label": "Playlist Jam Session",
+          "label": "Jam Session",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F8",
-          "label": "LET – laboratorio teatrale",
+          "label": "Karaoke",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F9",
-          "label": "Lezioni di pallavolo",
+          "label": "Concerto interattivo di Fortino",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F10",
-          "label": "Cineforum in lingua originale",
+          "label": "Torneo di cruciverba",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F11",
-          "label": "Laboratorio di origami",
+          "label": "Giochi da tavolo con il Board Game Club",
           "other": false,
           "exclusive": false
         },
@@ -488,37 +497,37 @@ window.BT_SURVEY = {
         },
         {
           "code": "F13",
-          "label": "Simposio filosofico",
+          "label": "Laboratorio fotografico",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F14",
-          "label": "Laboratorio di creazione di giochi",
+          "label": "Laboratorio di origami",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F15",
-          "label": "Aperiscienza",
+          "label": "Laboratorio di disegno",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F16",
-          "label": "Karaoke",
+          "label": "Laboratorio musicale e creazione di strumenti",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F17",
-          "label": "Concerto interattivo di Fortino",
+          "label": "Laboratorio di creazione di giochi",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F18",
-          "label": "Racconti di viaggio",
+          "label": "Laboratorio di collage",
           "other": false,
           "exclusive": false
         },
@@ -530,55 +539,7 @@ window.BT_SURVEY = {
         },
         {
           "code": "F20",
-          "label": "Giochi da tavolo con il Board Game Club",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F21",
-          "label": "Laboratorio di disegno",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F22",
-          "label": "Laboratorio musicale e creazione di strumenti",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F23",
-          "label": "Bookclub",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F24",
-          "label": "Jam Session",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F25",
-          "label": "Agorà",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F26",
-          "label": "Laboratorio di collage",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F27",
-          "label": "Meditazione",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F28",
-          "label": "Yoga",
+          "label": "Laboratorio teatrale",
           "other": false,
           "exclusive": false
         },
@@ -596,11 +557,12 @@ window.BT_SURVEY = {
         }
       ],
       "hint": [
-        "Indica al massimo tre risposte (non è obbligatorio indicarne tre)."
+        "Seleziona al massimo 3 risposte."
       ],
       "random": true,
       "highlights": [],
-      "max": 3
+      "max": 3,
+      "displayCode": "B1"
     },
     {
       "id": "B8",
@@ -633,51 +595,6 @@ window.BT_SURVEY = {
         {
           "id": "B8_F1",
           "activityCode": "F1",
-          "label": "Club di scrittura",
-          "question": "Quando hai partecipato a: Club di scrittura?",
-          "highlights": [
-            "Club di scrittura"
-          ]
-        },
-        {
-          "id": "B8_F2",
-          "activityCode": "F2",
-          "label": "Laboratorio di scrittura stand-up comedy",
-          "question": "Quando hai partecipato a: Laboratorio di scrittura stand-up comedy?",
-          "highlights": [
-            "Laboratorio di scrittura stand-up comedy"
-          ]
-        },
-        {
-          "id": "B8_F3",
-          "activityCode": "F3",
-          "label": "Torneo di cruciverba",
-          "question": "Quando hai partecipato a: Torneo di cruciverba?",
-          "highlights": [
-            "Torneo di cruciverba"
-          ]
-        },
-        {
-          "id": "B8_F4",
-          "activityCode": "F4",
-          "label": "Laboratorio fotografico",
-          "question": "Quando hai partecipato a: Laboratorio fotografico?",
-          "highlights": [
-            "Laboratorio fotografico"
-          ]
-        },
-        {
-          "id": "B8_F5",
-          "activityCode": "F5",
-          "label": "Sport Talk",
-          "question": "Quando hai partecipato a: Sport Talk?",
-          "highlights": [
-            "Sport Talk"
-          ]
-        },
-        {
-          "id": "B8_F6",
-          "activityCode": "F6",
           "label": "Aperitivo sociale",
           "question": "Quando hai partecipato a: Aperitivo sociale?",
           "highlights": [
@@ -685,48 +602,93 @@ window.BT_SURVEY = {
           ]
         },
         {
+          "id": "B8_F2",
+          "activityCode": "F2",
+          "label": "Bookclub",
+          "question": "Quando hai partecipato a: Bookclub?",
+          "highlights": [
+            "Bookclub"
+          ]
+        },
+        {
+          "id": "B8_F3",
+          "activityCode": "F3",
+          "label": "Simposio filosofico",
+          "question": "Quando hai partecipato a: Simposio filosofico?",
+          "highlights": [
+            "Simposio filosofico"
+          ]
+        },
+        {
+          "id": "B8_F4",
+          "activityCode": "F4",
+          "label": "Sport Talk",
+          "question": "Quando hai partecipato a: Sport Talk?",
+          "highlights": [
+            "Sport Talk"
+          ]
+        },
+        {
+          "id": "B8_F5",
+          "activityCode": "F5",
+          "label": "Aperiscienza",
+          "question": "Quando hai partecipato a: Aperiscienza?",
+          "highlights": [
+            "Aperiscienza"
+          ]
+        },
+        {
+          "id": "B8_F6",
+          "activityCode": "F6",
+          "label": "Cineforum",
+          "question": "Quando hai partecipato a: Cineforum?",
+          "highlights": [
+            "Cineforum"
+          ]
+        },
+        {
           "id": "B8_F7",
           "activityCode": "F7",
-          "label": "Playlist Jam Session",
-          "question": "Quando hai partecipato a: Playlist Jam Session?",
+          "label": "Jam Session",
+          "question": "Quando hai partecipato a: Jam Session?",
           "highlights": [
-            "Playlist Jam Session"
+            "Jam Session"
           ]
         },
         {
           "id": "B8_F8",
           "activityCode": "F8",
-          "label": "LET – laboratorio teatrale",
-          "question": "Quando hai partecipato a: LET – laboratorio teatrale?",
+          "label": "Karaoke",
+          "question": "Quando hai partecipato a: Karaoke?",
           "highlights": [
-            "LET – laboratorio teatrale"
+            "Karaoke"
           ]
         },
         {
           "id": "B8_F9",
           "activityCode": "F9",
-          "label": "Lezioni di pallavolo",
-          "question": "Quando hai partecipato a: Lezioni di pallavolo?",
+          "label": "Concerto interattivo di Fortino",
+          "question": "Quando hai partecipato a: Concerto interattivo di Fortino?",
           "highlights": [
-            "Lezioni di pallavolo"
+            "Concerto interattivo di Fortino"
           ]
         },
         {
           "id": "B8_F10",
           "activityCode": "F10",
-          "label": "Cineforum in lingua originale",
-          "question": "Quando hai partecipato a: Cineforum in lingua originale?",
+          "label": "Torneo di cruciverba",
+          "question": "Quando hai partecipato a: Torneo di cruciverba?",
           "highlights": [
-            "Cineforum in lingua originale"
+            "Torneo di cruciverba"
           ]
         },
         {
           "id": "B8_F11",
           "activityCode": "F11",
-          "label": "Laboratorio di origami",
-          "question": "Quando hai partecipato a: Laboratorio di origami?",
+          "label": "Giochi da tavolo con il Board Game Club",
+          "question": "Quando hai partecipato a: Giochi da tavolo con il Board Game Club?",
           "highlights": [
-            "Laboratorio di origami"
+            "Giochi da tavolo con il Board Game Club"
           ]
         },
         {
@@ -741,15 +703,42 @@ window.BT_SURVEY = {
         {
           "id": "B8_F13",
           "activityCode": "F13",
-          "label": "Simposio filosofico",
-          "question": "Quando hai partecipato a: Simposio filosofico?",
+          "label": "Laboratorio fotografico",
+          "question": "Quando hai partecipato a: Laboratorio fotografico?",
           "highlights": [
-            "Simposio filosofico"
+            "Laboratorio fotografico"
           ]
         },
         {
           "id": "B8_F14",
           "activityCode": "F14",
+          "label": "Laboratorio di origami",
+          "question": "Quando hai partecipato a: Laboratorio di origami?",
+          "highlights": [
+            "Laboratorio di origami"
+          ]
+        },
+        {
+          "id": "B8_F15",
+          "activityCode": "F15",
+          "label": "Laboratorio di disegno",
+          "question": "Quando hai partecipato a: Laboratorio di disegno?",
+          "highlights": [
+            "Laboratorio di disegno"
+          ]
+        },
+        {
+          "id": "B8_F16",
+          "activityCode": "F16",
+          "label": "Laboratorio musicale e creazione di strumenti",
+          "question": "Quando hai partecipato a: Laboratorio musicale e creazione di strumenti?",
+          "highlights": [
+            "Laboratorio musicale e creazione di strumenti"
+          ]
+        },
+        {
+          "id": "B8_F17",
+          "activityCode": "F17",
           "label": "Laboratorio di creazione di giochi",
           "question": "Quando hai partecipato a: Laboratorio di creazione di giochi?",
           "highlights": [
@@ -757,39 +746,12 @@ window.BT_SURVEY = {
           ]
         },
         {
-          "id": "B8_F15",
-          "activityCode": "F15",
-          "label": "Aperiscienza",
-          "question": "Quando hai partecipato a: Aperiscienza?",
-          "highlights": [
-            "Aperiscienza"
-          ]
-        },
-        {
-          "id": "B8_F16",
-          "activityCode": "F16",
-          "label": "Karaoke",
-          "question": "Quando hai partecipato a: Karaoke?",
-          "highlights": [
-            "Karaoke"
-          ]
-        },
-        {
-          "id": "B8_F17",
-          "activityCode": "F17",
-          "label": "Concerto interattivo di Fortino",
-          "question": "Quando hai partecipato a: Concerto interattivo di Fortino?",
-          "highlights": [
-            "Concerto interattivo di Fortino"
-          ]
-        },
-        {
           "id": "B8_F18",
           "activityCode": "F18",
-          "label": "Racconti di viaggio",
-          "question": "Quando hai partecipato a: Racconti di viaggio?",
+          "label": "Laboratorio di collage",
+          "question": "Quando hai partecipato a: Laboratorio di collage?",
           "highlights": [
-            "Racconti di viaggio"
+            "Laboratorio di collage"
           ]
         },
         {
@@ -804,144 +766,88 @@ window.BT_SURVEY = {
         {
           "id": "B8_F20",
           "activityCode": "F20",
-          "label": "Giochi da tavolo con il Board Game Club",
-          "question": "Quando hai partecipato a: Giochi da tavolo con il Board Game Club?",
+          "label": "Laboratorio teatrale",
+          "question": "Quando hai partecipato a: Laboratorio teatrale?",
           "highlights": [
-            "Giochi da tavolo con il Board Game Club"
-          ]
-        },
-        {
-          "id": "B8_F21",
-          "activityCode": "F21",
-          "label": "Laboratorio di disegno",
-          "question": "Quando hai partecipato a: Laboratorio di disegno?",
-          "highlights": [
-            "Laboratorio di disegno"
-          ]
-        },
-        {
-          "id": "B8_F22",
-          "activityCode": "F22",
-          "label": "Laboratorio musicale e creazione di strumenti",
-          "question": "Quando hai partecipato a: Laboratorio musicale e creazione di strumenti?",
-          "highlights": [
-            "Laboratorio musicale e creazione di strumenti"
-          ]
-        },
-        {
-          "id": "B8_F23",
-          "activityCode": "F23",
-          "label": "Bookclub",
-          "question": "Quando hai partecipato a: Bookclub?",
-          "highlights": [
-            "Bookclub"
-          ]
-        },
-        {
-          "id": "B8_F24",
-          "activityCode": "F24",
-          "label": "Jam Session",
-          "question": "Quando hai partecipato a: Jam Session?",
-          "highlights": [
-            "Jam Session"
-          ]
-        },
-        {
-          "id": "B8_F25",
-          "activityCode": "F25",
-          "label": "Agorà",
-          "question": "Quando hai partecipato a: Agorà?",
-          "highlights": [
-            "Agorà"
-          ]
-        },
-        {
-          "id": "B8_F26",
-          "activityCode": "F26",
-          "label": "Laboratorio di collage",
-          "question": "Quando hai partecipato a: Laboratorio di collage?",
-          "highlights": [
-            "Laboratorio di collage"
-          ]
-        },
-        {
-          "id": "B8_F27",
-          "activityCode": "F27",
-          "label": "Meditazione",
-          "question": "Quando hai partecipato a: Meditazione?",
-          "highlights": [
-            "Meditazione"
-          ]
-        },
-        {
-          "id": "B8_F28",
-          "activityCode": "F28",
-          "label": "Yoga",
-          "question": "Quando hai partecipato a: Yoga?",
-          "highlights": [
-            "Yoga"
+            "Laboratorio teatrale"
           ]
         }
-      ]
+      ],
+      "displayCode": "B2"
     },
     {
       "id": "B9",
-      "text": "Quali tipi di attività vorresti che Better Together proponesse più frequentemente?",
+      "text": "Quali tipi di attività vorresti che Better Together proponesse più spesso in futuro?",
       "type": "multi",
       "opts": [
         {
           "code": "O01",
-          "label": "Attività sportive o di movimento",
+          "label": "Aperitivi e momenti di socialità informale",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Aperitivi e momenti di socialità informale"
+          ]
         },
         {
           "code": "O02",
-          "label": "Giochi e attività ludiche",
+          "label": "Incontri culturali e divulgativi (libri, cinema, filosofia, scienza, sport)",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Incontri culturali e divulgativi"
+          ]
         },
         {
           "code": "O03",
-          "label": "Attività culturali",
+          "label": "Musica e intrattenimento (concerti, jam session, karaoke)",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Musica e intrattenimento"
+          ]
         },
         {
           "code": "O04",
-          "label": "Laboratori o attività creative",
+          "label": "Giochi e attività ludiche (giochi da tavolo, cruciverba, giochi di gruppo)",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Giochi e attività ludiche"
+          ]
         },
         {
           "code": "O05",
-          "label": "Momenti di socialità",
+          "label": "Laboratori creativi e artistici (fotografia, disegno, musica, teatro, attività manuali)",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Laboratori creativi e artistici"
+          ]
         },
         {
           "code": "O06",
-          "label": "Altre attività (specificare):",
+          "label": "Altro (specificare):",
           "other": true,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Altro"
+          ]
         },
         {
           "code": "O07",
-          "label": "Nessuna in particolare",
-          "other": false,
-          "exclusive": true
-        },
-        {
-          "code": "O08",
           "label": "Non so",
           "other": false,
           "exclusive": true
         }
       ],
-      "hint": [],
+      "hint": [
+        "Seleziona al massimo 2 risposte."
+      ],
       "random": true,
       "highlights": [],
-      "max": 2
+      "max": 2,
+      "displayCode": "B3"
     },
     {
       "id": "B10",
@@ -1021,7 +927,8 @@ window.BT_SURVEY = {
       "random": true,
       "highlights": [],
       "demoList": false,
-      "max": 3
+      "max": 3,
+      "displayCode": "B4"
     },
     {
       "id": "B12",
@@ -1149,7 +1056,8 @@ window.BT_SURVEY = {
             "Copernico Martesana"
           ]
         }
-      ]
+      ],
+      "displayCode": "B5"
     },
     {
       "id": "B11",
@@ -1220,7 +1128,8 @@ window.BT_SURVEY = {
       "hint": [],
       "random": true,
       "highlights": [],
-      "max": 3
+      "max": 3,
+      "displayCode": "B6"
     },
     {
       "id": "B14",
@@ -1291,7 +1200,8 @@ window.BT_SURVEY = {
       "hint": [],
       "random": true,
       "highlights": [],
-      "max": 3
+      "max": 3,
+      "displayCode": "B7"
     },
     {
       "id": "C6",
@@ -1349,7 +1259,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "C1"
     },
     {
       "id": "C1",
@@ -1395,7 +1306,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "C2"
     },
     {
       "id": "C2",
@@ -1443,7 +1355,8 @@ window.BT_SURVEY = {
         "Considera incontri, conversazioni o scambi personali, anche a distanza. Non contare la semplice presenza nello stesso gruppo di messaggistica."
       ],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "C3"
     },
     {
       "id": "C5",
@@ -1489,7 +1402,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "C4"
     },
     {
       "id": "D1",
@@ -1539,7 +1453,8 @@ window.BT_SURVEY = {
       "random": false,
       "highlights": [
         "gennaio 2027"
-      ]
+      ],
+      "displayCode": "D1"
     },
     {
       "id": "D2",
@@ -1604,7 +1519,8 @@ window.BT_SURVEY = {
       "hint": [],
       "random": true,
       "highlights": [],
-      "max": 2
+      "max": 2,
+      "displayCode": "D2"
     },
     {
       "id": "D3",
@@ -1699,7 +1615,8 @@ window.BT_SURVEY = {
       "hint": [],
       "random": true,
       "highlights": [],
-      "max": 3
+      "max": 3,
+      "displayCode": "D3"
     },
     {
       "id": "D5",
@@ -1808,7 +1725,8 @@ window.BT_SURVEY = {
       ],
       "random": true,
       "highlights": [],
-      "max": 2
+      "max": 2,
+      "displayCode": "D4"
     },
     {
       "id": "E2",
@@ -1885,7 +1803,8 @@ window.BT_SURVEY = {
       "hint": [],
       "random": true,
       "highlights": [],
-      "max": 2
+      "max": 2,
+      "displayCode": "E1"
     },
     {
       "id": "F1",
@@ -1931,7 +1850,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "F1"
     },
     {
       "id": "F2",
@@ -1977,7 +1897,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "F2"
     },
     {
       "id": "F3",
@@ -2023,7 +1944,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "F3"
     },
     {
       "id": "G1",
@@ -2063,7 +1985,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "G1"
     },
     {
       "id": "G2",
@@ -2109,7 +2032,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "G2"
     },
     {
       "id": "G3",
@@ -2149,7 +2073,8 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "G3"
     },
     {
       "id": "G4",
@@ -2209,7 +2134,8 @@ window.BT_SURVEY = {
         "Considera l’attuale periodo di residenza continuativa. Se ci hai sempre vissuto, scegli \"Da sempre\"."
       ],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "G4"
     },
     {
       "id": "G5",
@@ -2233,7 +2159,8 @@ window.BT_SURVEY = {
         "Non indicare l’indirizzo completo."
       ],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "G5"
     },
     {
       "id": "H1",
@@ -2257,7 +2184,8 @@ window.BT_SURVEY = {
         "Grazie per il tempo che ci hai dedicato. Il tuo contributo aiuterà a comprendere meglio le esperienze e le esigenze dei soci."
       ],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "displayCode": "H1"
     }
   ],
   "sections": [
