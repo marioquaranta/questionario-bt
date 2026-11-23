@@ -227,6 +227,7 @@ function renderIntro(){
    <p>I risultati saranno presentati esclusivamente in forma aggregata, senza identificare i singoli soci.</p>
    <p class="bt-privacy-link"><a href="privacy.html" target="_blank" rel="noopener noreferrer">Leggi l'informativa sulla privacy <span aria-hidden="true">↗</span></a></p>
   </section>
+  <p class="muted small">Per informazioni puoi scrivere a <a href="mailto:info@bettertogetherspace.it">info@bettertogetherspace.it</a>.</p>
   <p class="muted small bt-resume-text">Se interrompi la compilazione, potrai riprenderla riaprendo il tuo link personale, anche da un altro dispositivo.</p>
   ${upgrade}
  </div><div class="actions bt-intro-actions"><span></span><button type="button" class="btn primary" data-action="start">${startLabel} →</button></div></div>`;
