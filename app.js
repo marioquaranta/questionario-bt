@@ -1,8 +1,8 @@
 'use strict';
 /* Better Together: accesso diretto con link personale. */
 const ENDPOINT='https://ixevtederjaovjkhvuqi.supabase.co/functions/v1/bt-questionario';
-const SCHEMA_VERSION=10;
-const SURVEY_REVISION='BT_V9_5_20261120_ATTIVITA20';
+const SCHEMA_VERSION=11;
+const SURVEY_REVISION='BT_V9_6_20261124_CATEGORIE8';
 const SURVEY=window.BT_SURVEY;
 const QUESTIONS=SURVEY.questions;
 const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
@@ -113,7 +113,6 @@ function venueName(code){return QUESTION_MAP.B10.opts.find(o=>o.code===code)?.la
 function active(q,state=answers){
  const value=(id)=>state[id]?.v;
  if(q.id==='P3')return ['O03','O04','O05'].includes(value('P2')) && ['O02','O03'].includes(value('P1'));
- if(q.id==='B8')return Array.isArray(value('B7')) && value('B7').some(code=>/^F\d+$/.test(code));
  if(['B11','B12'].includes(q.id))return chosenVenues(state).length>0;
  if(q.id==='D5')return ['O03','O04','O05'].includes(value('P2'));
  if(q.id==='G3')return ['O01','O02'].includes(value('G2'));
@@ -121,10 +120,6 @@ function active(q,state=answers){
 }
 function activeQuestions(){return QUESTIONS.filter(q=>active(q));}
 function matrixRows(q,state=answers){
- if(q.id==='B8'){
-  const chosen=Array.isArray(state.B7?.v)?state.B7.v:[];
-  return chosen.map(code=>q.rows.find(row=>row.activityCode===code)).filter(Boolean);
- }
  if(q.id==='B12'){
   return chosenVenues(state).map(code=>q.rows.find(row=>row.venueCode===code)).filter(Boolean);
  }
@@ -143,9 +138,9 @@ function matrixRows(q,state=answers){
 function steps(){
   return activeQuestions().flatMap(q=>{
     let pages;
-    // B11: a page for each selected venue; B8 and B12 stay on one page.
+    // B11: a page for each selected venue; B12 stays on one page.
     if(q.id==='B11')pages=chosenVenues().map(code=>({key:'B11::'+code,q,row:{id:'B11_'+code,venueCode:code,label:venueName(code)}}));
-    else if(q.type==='matrix' && ['A6-A7','B8','B12'].includes(q.id))pages=[{key:q.id,q,row:null}];
+    else if(q.type==='matrix' && ['A6-A7','B12'].includes(q.id))pages=[{key:q.id,q,row:null}];
     else pages=q.type==='matrix' ? matrixRows(q).map(row=>({key:`${q.id}::${row.id}`,q,row}))
       : [{key:q.id,q,row:null}];
     const section=(SURVEY.sections||[]).find(x=>x.startAt===q.id);
@@ -179,7 +174,6 @@ function richText(value,highlights=[]){
  return result+escapeHtml(src.slice(cursor));
 }
 function displayTitle(q,row){
- if(q.id==='B8')return 'Quando hai partecipato a:';
  let txt=q.text;
  if(q.id==='B11'&&row?.venueCode){
    txt=txt+' '+venueName(row.venueCode)+'?';
@@ -252,7 +246,7 @@ function renderSingle(q){
 function renderMulti(q,row=null){
  const ans=getAnswer(q,row)||{v:[],otherTexts:{}};
  const codes=Array.isArray(ans.v)?ans.v:[];
- const maxText=['B7','B9','B10'].includes(q.id)?'':q.max?`Seleziona al massimo ${q.max} risposte.`:'Seleziona tutte le risposte pertinenti.';
+ const maxText=['B9','B10'].includes(q.id)?'':q.max?`Seleziona al massimo ${q.max} risposte.`:'Seleziona tutte le risposte pertinenti.';
  const options=optionOrders[q.id];
  return `${maxText?`<p class="muted small" style="margin-bottom:16px">${maxText}</p>`:''}<div class="choice-list">${options.map(o=>{
    const checked=codes.includes(o.code);
@@ -268,11 +262,10 @@ function renderMatrixItem(q,row){
     'B1-B5':'Per ogni situazione descritta, seleziona una sola risposta.',
     'B9V':'Per ogni aspetto indicato, seleziona una sola risposta.',
     'B13':'Per ogni caratteristica indicata, seleziona una sola risposta.',
-    'B8':'Seleziona una sola risposta per questa attività.',
-    'B12':'Seleziona una risposta per questa sede.'
+        'B12':'Seleziona una risposta per questa sede.'
   };
   const instruction=instructionByBattery[q.id]||'Seleziona una sola risposta.';
-  const prefix=`<h3 class="battery-item-label">${richText(row.label,['B8','B12'].includes(q.id)?[row.label]:row.highlights)}</h3><p class="muted small battery-instruction">${escapeHtml(instruction)}</p>`;
+  const prefix=`<h3 class="battery-item-label">${richText(row.label,q.id==='B12'?[row.label]:row.highlights)}</h3><p class="muted small battery-instruction">${escapeHtml(instruction)}</p>`;
   const choices=`<div class="scale-labeled" role="group" aria-label="${escapeHtml(row.label)}">${normal.map(o=>`<button type="button" class="scale-label ${ans===o.code?'active':''}" data-action="matrix-choice" data-rowid="${row.id}" data-code="${o.code}" aria-pressed="${ans===o.code}"><strong>${o.code}</strong><span>${escapeHtml(o.label)}</span></button>`).join('')}</div>`;
   const special=extras.length?`<div class="specials">${extras.map(o=>`<label class="special-choice ${ans===o.code?'selected':''}"><input type="radio" name="matrix-${q.id}-${row.id}" data-action="matrix-radio" data-rowid="${row.id}" value="${escapeHtml(o.code)}" ${ans===o.code?'checked':''}>${escapeHtml(o.label)}</label>`).join('')}</div>`:'';
   return prefix+choices+special;
@@ -365,14 +358,6 @@ function updateMulti(code,checked){
    answers.B11.byVenue[venue]={v:values,otherTexts:current.otherTexts||{}};
  }else{
    answers[q.id]={v:values,otherTexts:current.otherTexts||{}};
-   if(q.id==='B7'){
-     // Le risposte su attivita' non piu' selezionate non devono ricomparire.
-     const selected=new Set(values.filter(c=>/^F\d+$/.test(c)));
-     if(answers.B8?.rows)for(const rowId of Object.keys(answers.B8.rows)){
-       if(!selected.has(rowId.replace('B8_','')))delete answers.B8.rows[rowId];
-     }
-     if(answers.B8?.rows && !Object.keys(answers.B8.rows).length)delete answers.B8;
-   }
    if(q.id==='B10'){
      const selected=new Set(chosenVenues());
      if(answers.B12?.rows)for(const v of Object.keys(answers.B12.rows))if(!selected.has(v.replace('B12_','')))delete answers.B12.rows[v];
