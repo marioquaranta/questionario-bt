@@ -1,0 +1,26 @@
+GITHUB PAGES / SITO DEL QUESTIONARIO T1 v9.6
+
+Dominio atteso: https://questionario.bettertogetherspace.it/
+Nel repository CHE EFFETTIVAMENTE PUBBLICA il dominio, verificare in
+Settings > Pages la branch e la cartella di pubblicazione (root o /docs).
+Il nome storico test-dev non prova quale sia il repository attuale:
+verificare sempre anche eventuali spostamenti/redirect a questionario-bt.
+
+Nella directory pubblicata devono esserci ESATTAMENTE questi asset necessari:
+index.html, app.js, questions.js, styles.css, logo.png, privacy.html, CNAME.
+Non pubblicare il resto del pacchetto, i dati, lo script Gmail, le chiavi
+private o i file riservati.
+
+Il codice locale del pacchetto contiene la revisione
+BT_V9_6_20261124_CATEGORIE8 (schema 11). Il file index.html usa un parametro
+?v=... su app.js per ridurre il rischio della cache; se il deploy modifica
+app.js, aggiornare il parametro e verificare il caricamento.
+
+Allineare: endpoint Supabase in app.js; CORS nella Edge Function; CNAME.
+Eseguire test con token di prova: caricamento, salvataggio, filtri,
+randomizzazioni, completamento, blocco della seconda compilazione.
+Eliminare i record di prova prima di generare e inviare gli inviti T1.
+
+IMPORTANTE: questa copia e' stata verificata localmente; senza accesso
+al deploy e al backend attivi non si puo' certificare che la versione
+pubblicata coincida con i file di questo ZIP.

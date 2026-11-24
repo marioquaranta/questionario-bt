@@ -29,10 +29,7 @@ for(const q of QUESTIONS){
  const o=q.opts||[];
  const fixed=o.filter(x=>x.fixed||x.other||x.exclusive||x.label==='Non ricordo'||x.label==='Non so');
  optionOrders[q.id]=q.random?[...seededShuffle(o.filter(x=>!fixed.includes(x)),randomSeed(invitation+':'+q.id+':options')),...fixed]:o;
- if(q.type==='matrix'){
-  if(q.id==='B1-B5')rowOrders[q.id]=seededShuffle(q.rows.filter(r=>r.id!=='B2'),randomSeed(invitation+':'+q.id+':rows'));
-  else rowOrders[q.id]=q.random?seededShuffle(q.rows,randomSeed(invitation+':'+q.id+':rows')):q.rows;
- }
+ if(q.type==='matrix')rowOrders[q.id]=q.random?seededShuffle(q.rows,randomSeed(invitation+':'+q.id+':rows')):q.rows;
 }
 function setSaveStatus(text){const el=document.getElementById('save-state');if(el)el.textContent=text||'';}
 function stepIndex(){return Math.max(0,steps().findIndex(x=>x.key===currentKey));}
@@ -124,14 +121,6 @@ function matrixRows(q,state=answers){
   return chosenVenues(state).map(code=>q.rows.find(row=>row.venueCode===code)).filter(Boolean);
  }
  const rows=rowOrders[q.id]||[];
- if(q.id==='B1-B5'){
-  const withB2=[];
-  for(const r of rows){
-   withB2.push(r);
-   if(r.id==='B1'&&['2','3','4'].includes(state[q.id]?.rows?.B1))withB2.push(q.rows.find(x=>x.id==='B2'));
-  }
-  return withB2;
- }
  return rows;
 }
 // Una schermata per ogni item delle batterie, senza alterare i codici delle variabili.
@@ -212,7 +201,7 @@ function renderIntro(){
    <p>Better Together nasce per creare occasioni di incontro, favorire nuove conoscenze e costruire relazioni. Per continuare a crescere e migliorare, abbiamo bisogno anche del <strong>tuo punto di vista</strong>.</p>
    <p>Con questo questionario vogliamo capire <strong>come hai vissuto la tua esperienza con Better Together</strong>, quali aspetti hai apprezzato, che cosa possiamo migliorare e quali attività ti piacerebbe trovare in futuro.</p>
    <p><strong>La tua opinione è importante anche se hai partecipato poche volte o non frequenti più i Ritrovi Urbani.</strong> Vogliamo conoscere le esperienze di tutti i soci, non soltanto di chi partecipa regolarmente.</p>
-   <p>Compilare il questionario richiede circa <strong>10 minuti</strong>. Non ci sono risposte giuste o sbagliate: ti chiediamo soltanto di rispondere con sincerità. <strong>La partecipazione è libera e volontaria.</strong></p>
+   <p>Compilare il questionario meno di <strong>10 minuti</strong>. Non ci sono risposte giuste o sbagliate: ti chiediamo soltanto di rispondere con sincerità. <strong>La partecipazione è libera e volontaria.</strong></p>
   </div>
   <section class="bt-privacy-summary" aria-labelledby="bt-privacy-title">
    <h2 id="bt-privacy-title">La tua privacy è importante</h2>
@@ -371,7 +360,6 @@ function updateMulti(code,checked){
 function updateMatrix(rowid,code){
  const q=getStep().q;
  answers[q.id]={rows:{...(answers[q.id]?.rows||{}),[rowid]:code}};
- if(q.id==='B1-B5'&&rowid==='B1'&&!['2','3','4'].includes(code))delete answers[q.id].rows.B2;
  alertMessage='';scheduleSave();renderQuestion(true);
 }
 async function next(){
