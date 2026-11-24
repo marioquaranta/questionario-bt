@@ -151,7 +151,7 @@ function getStep(){return steps().find(s=>s.key===currentKey)||null;}
 function pageTop(){
   const list=steps();const i=Math.max(0,list.findIndex(s=>s.key===currentKey));
   const percent=Math.round(((i+1)/list.length)*100);
-  return `<div class="single-flow"><div class="eyebrow">QUESTIONARIO SOCI · DICEMBRE 2026</div><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-label="Avanzamento"><div class="progress-fill" style="width:${percent}%"></div></div>`;
+  return `<div class="single-flow"><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-label="Avanzamento"><div class="progress-fill" style="width:${percent}%"></div></div>`;
 }
 // Raccordi e parole in grassetto del Word: in viola, senza cambiare font.
 function richText(value,highlights=[]){
@@ -191,7 +191,7 @@ function titleAndHint(q,row){
  }else{
   title=richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights);
  }
- return `<p class="question-progress-number">${escapeHtml(q.displayCode||q.id)}</p><h2 id="question-title">${title}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
+ return `<h2 id="question-title">${title}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 // A raccordo is a standalone screen: never combine it with the first question.
 function renderRaccordo(step,preserveScroll=false){
